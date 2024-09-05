@@ -1,19 +1,7 @@
-import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 export default function Characters() {
-  const URL_CHARACTERS = "https://rickandmortyapi.com/api/character";
-
-  const [characters, setCharacters] = useState([]);
-
-  const fetchCharacters = () => {
-    fetch(URL_CHARACTERS)
-      .then((response) => response.json())
-      .then((data) => setCharacters(data.results));
-  };
-
-  useEffect(() => {
-    fetchCharacters();
-  });
+  const characters = useLoaderData();
 
   return (
     <div className="grid grid-cols-2 gap-8 text-white">
@@ -21,14 +9,18 @@ export default function Characters() {
         return (
           <div
             key={character.id}
-            className="w-full bg-blue-500 flex flex-row rounded-lg"
+            className="w-full bg-gray-800 flex flex-row rounded-lg"
           >
             <img src={character.image} alt="" className="w-44 rounded-l-lg" />
-            <p className="font-bold text-2xl">{character.name}</p>
-            <p>
-              {character.status} - {character.species}
-            </p>
-            <p>{character.location.name}</p>
+            <div className="mx-4 flex flex-col justify-center">
+              <p className="font-bold text-2xl">{character.name}</p>
+              <p>
+                {character.status} - {character.species}
+              </p>
+              <span className="text-gray-300">Last know location:</span>
+              <p>{character.location.name}</p>
+              {/* <p>{character.episode}</p> DE AQUI SE TOMA EL EPISODIO DONDE APARECE */}
+            </div>
           </div>
         );
       })}
