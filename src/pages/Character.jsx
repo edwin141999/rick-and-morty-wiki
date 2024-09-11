@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 export default function Character() {
   const character = useLoaderData();
+  const navigate = useNavigate();
 
   const [infoEpisode, setInfoEpisode] = useState([]);
+
+  const onClickEpisode = (id) => {
+    navigate(`/episode/${id}`);
+  };
 
   const isMounted = useRef(false);
 
@@ -84,7 +89,10 @@ export default function Character() {
                 className="border-separate border-spacing-2 border border-slate-600"
               >
                 <tbody>
-                  <tr>
+                  <tr
+                    onClick={() => onClickEpisode(info.idCharacter)}
+                    className="cursor-pointer"
+                  >
                     <th scope="row" className="text-start text-wrap">
                       {info.nameEpisode}
                     </th>

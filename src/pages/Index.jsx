@@ -5,6 +5,7 @@ import Character from "./Character";
 import Characters from "./Characters";
 import Episodes from "./Episodes";
 import Locations from "./Locations";
+import Episode from "./Episode";
 
 export function Index() {
   const count = useSelector((state) => state.counter.value);
@@ -58,7 +59,17 @@ export function Index() {
                 return data;
               });
           },
-          
+        },
+        {
+          path: "episode/:episodeId",
+          element: <Episode />,
+          loader: async ({params}) => {
+            return await fetch(`https://rickandmortyapi.com/api/episode/${params.episodeId}`)
+              .then((response) => response.json())
+              .then((data) => {
+                return data;
+              });
+          },
         },
       ],
     },
