@@ -10,7 +10,6 @@ export default function Characters() {
   const navigate = useNavigate();
 
   const onClickInfo = (id) => {
-    
     navigate(`/character/${id}`);
   };
 

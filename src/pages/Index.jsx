@@ -3,9 +3,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "../App";
 import Character from "./Character";
 import Characters from "./Characters";
-import Episodes from "./Episodes";
-import Locations from "./Locations";
 import Episode from "./Episode";
+import Episodes from "./Episodes";
+import Location from "./Location";
+import Locations from "./Locations";
 
 export function Index() {
   const count = useSelector((state) => state.counter.value);
@@ -52,8 +53,10 @@ export function Index() {
         {
           path: "character/:characterId",
           element: <Character />,
-          loader: async ({params}) => {
-            return await fetch(`https://rickandmortyapi.com/api/character/${params.characterId}`)
+          loader: async ({ params }) => {
+            return await fetch(
+              `https://rickandmortyapi.com/api/character/${params.characterId}`
+            )
               .then((response) => response.json())
               .then((data) => {
                 return data;
@@ -63,8 +66,23 @@ export function Index() {
         {
           path: "episode/:episodeId",
           element: <Episode />,
-          loader: async ({params}) => {
-            return await fetch(`https://rickandmortyapi.com/api/episode/${params.episodeId}`)
+          loader: async ({ params }) => {
+            return await fetch(
+              `https://rickandmortyapi.com/api/episode/${params.episodeId}`
+            )
+              .then((response) => response.json())
+              .then((data) => {
+                return data;
+              });
+          },
+        },
+        {
+          path: "location/:locationId",
+          element: <Location />,
+          loader: async ({ params }) => {
+            return await fetch(
+              `https://rickandmortyapi.com/api/location/${params.locationId}`
+            )
               .then((response) => response.json())
               .then((data) => {
                 return data;
